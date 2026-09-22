@@ -3,59 +3,104 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>13.02-13.52 · PS4 Exploit</title>
+    <title>Dreams Playstation - 13.02-13.52 · PS4 Exploit</title>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
       html,
       body {
         margin: 0;
         padding: 0;
         min-height: 100%;
-        background: #0b0d10;
-        color: #c8ced8;
-        font:
-          15px/1.45 "Segoe UI",
-          system-ui,
-          sans-serif;
-      }
-      #brand {
-        text-align: center;
-        padding: 8px 10px;
-        background: #0e1116;
-        border-bottom: 1px solid #1e2732;
-      }
-      #brand img {
-        width: 28px;
-        height: 28px;
-        margin-right: 8px;
-        border-radius: 50%;
-        vertical-align: middle;
-      }
-      #brand b {
-        font-size: 15px;
-        font-weight: 700;
-        letter-spacing: 0.14em;
-        color: #e6ebf2;
-        vertical-align: middle;
+        background-color: #0a0a1a;
+        background-image:
+          radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 40%),
+          radial-gradient(circle at 80% 80%, rgba(0, 200, 255, 0.15) 0%, transparent 40%),
+          repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 4px);
+        color: #ffffff;
+        font-family: "Press Start 2P", "Segoe UI", system-ui, monospace;
       }
 
-      /* running: a spinner under the brand. jb.js sets body.done / body.fail / body.log. */
+      #brand {
+        text-align: center;
+        padding: 14px 10px;
+        background: linear-gradient(145deg, #14142b, #1e1e3f);
+        border-bottom: 3px solid #ff2e88;
+        box-shadow: 0 0 20px rgba(255, 46, 136, 0.6), 0 0 40px rgba(0, 200, 255, 0.3);
+      }
+
+      #brand .shop-name {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #ff2e88;
+        text-shadow: 0 0 8px #ff2e88, 0 0 16px #ff2e88;
+        margin-bottom: 6px;
+        animation: flicker 2s infinite alternate;
+      }
+
+      @keyframes flicker {
+        0%, 100% { opacity: 1; }
+        92% { opacity: 1; }
+        93% { opacity: 0.4; }
+        94% { opacity: 1; }
+        96% { opacity: 0.6; }
+        97% { opacity: 1; }
+      }
+
+      #brand .shop-sub {
+        display: block;
+        font-size: 0.5rem;
+        color: #00e0ff;
+        text-shadow: 0 0 6px #00e0ff;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+      }
+
+      #brand b {
+        display: block;
+        font-size: 0.7rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: #ffffff;
+        text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+        vertical-align: middle;
+        background: linear-gradient(45deg, #ff00aa, #00ffff, #ff00ff, #00ff9d);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientFlow 8s ease infinite;
+      }
+
+      @keyframes gradientFlow {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+      }
+
+      /* running: spinner di bawah brand. jb.js sets body.done / body.fail / body.log. */
       #spin {
         position: fixed;
         top: calc(50% + 20px);
         left: 50%;
-        width: 46px;
-        height: 46px;
-        margin: -23px 0 0 -23px;
-        border: 4px solid #1e2732;
-        border-top-color: #7fd0a0;
+        width: 52px;
+        height: 52px;
+        margin: -26px 0 0 -26px;
+        border: 4px solid #2e2e5e;
+        border-top-color: #ff2e88;
+        border-right-color: #00e0ff;
         border-radius: 50%;
         animation: spin 0.9s linear infinite;
+        box-shadow: 0 0 20px rgba(255, 46, 136, 0.6), 0 0 30px rgba(0, 224, 255, 0.3);
       }
+
       @keyframes spin {
         to {
           transform: rotate(360deg);
         }
       }
+
       #msg {
         position: fixed;
         top: 50%;
@@ -63,13 +108,19 @@
         right: 0;
         transform: translateY(-50%);
         text-align: center;
-        font-size: 16px;
+        font-size: 0.65rem;
+        line-height: 1.8;
         letter-spacing: 0.5px;
         display: none;
+        color: #ffe600;
+        text-shadow: 0 0 8px rgba(255, 230, 0, 0.8);
+        padding: 0 15px;
       }
+
       #wrap {
         padding: 0;
       }
+
       #state,
       #out {
         display: none;
@@ -78,70 +129,159 @@
       body.done #spin {
         display: none;
       }
+
       body.fail #spin {
         display: none;
       }
+
       body.fail #msg {
         display: block;
       }
 
-      /* ?log=1 -- the full step log, styled like the landing. */
+      /* ?log=1 -- log langkah lengkap, gaya seperti landing. */
       body.log #spin,
       body.log #msg {
         display: none;
       }
+
       body.log #wrap {
         padding: 14px 18px;
       }
+
       body.log #state {
         display: block;
-        font-size: 22px;
+        font-size: 0.85rem;
         font-weight: 700;
         margin: 0 0 8px;
+        color: #00e0ff;
+        text-shadow: 0 0 10px rgba(0, 224, 255, 0.8);
+        line-height: 1.8;
       }
+
       body.log #out {
         display: block;
         white-space: pre-wrap;
-        font:
-          12px/1.45 Consolas,
-          monospace;
-        background: #11151b;
-        border: 1px solid #1e2732;
-        border-radius: 5px;
-        padding: 10px 12px;
-        height: calc(100vh - 141px);
+        font: 12px/1.6 Consolas, monospace;
+        background: #08081a;
+        border: 2px dashed #2e2e5e;
+        border-radius: 8px;
+        padding: 12px;
+        height: calc(100vh - 200px);
         overflow-y: auto;
+        color: #ffffff;
+        box-shadow: 0 0 20px rgba(255, 46, 136, 0.3);
+        word-break: break-all;
       }
+
       .ok {
-        color: #7fd0a0;
+        color: #00ff6a;
+        text-shadow: 0 0 6px rgba(0, 255, 106, 0.7);
       }
+
       .bad {
-        color: #d08a7f;
+        color: #ff4d4d;
+        text-shadow: 0 0 6px rgba(255, 77, 77, 0.7);
       }
+
       .warn {
-        color: #d8c07f;
+        color: #ffe600;
+        text-shadow: 0 0 6px rgba(255, 230, 0, 0.7);
       }
+
       .safe {
-        color: #7fd0a0;
+        color: #00ff6a;
+        text-shadow: 0 0 6px rgba(0, 255, 106, 0.7);
       }
+
       .danger {
-        color: #d08a7f;
+        color: #ff4d4d;
+        text-shadow: 0 0 6px rgba(255, 77, 77, 0.7);
       }
+
       code {
         color: #9fb3d0;
+      }
+
+      .thanks {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        padding: 10px;
+        border-top: 2px dashed #2e2e5e;
+        font-size: 0.5rem;
+        color: #ffe600;
+        text-shadow: 0 0 8px rgba(255, 230, 0, 0.7);
+        line-height: 2;
+        font-family: "Press Start 2P", monospace;
+        background: #08081a;
+      }
+
+      .thanks strong {
+        color: #ff2e88;
+        text-shadow: 0 0 8px #ff2e88;
+      }
+
+      .thanks .wa {
+        display: inline-block;
+        margin-top: 6px;
+        padding: 6px 12px;
+        background: linear-gradient(145deg, #00b34a, #008f3a);
+        border: 2px solid #00ff6a;
+        border-radius: 8px;
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.5rem;
+        box-shadow: 0 0 12px rgba(0, 255, 106, 0.6);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .thanks .wa:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(0, 255, 106, 0.9);
+      }
+
+      .coin {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: radial-gradient(circle at 35% 35%, #fff6a0, #ffcc00 60%, #b8860b);
+        border-radius: 50%;
+        border: 2px solid #ffea00;
+        box-shadow: 0 0 8px rgba(255, 204, 0, 0.9);
+        vertical-align: middle;
+        margin: 0 4px;
+        animation: spin 1.5s linear infinite;
+      }
+
+      /* sembunyikan footer saat log aktif agar tidak menutupi output */
+      body.log .thanks {
+        display: none;
       }
     </style>
   </head>
   <body>
     <div id="brand">
-      <b>13.02-13.52 · PS4 Exploit</b>
+      <span class="shop-name">🎮 DREAMS PLAYSTATION 🎮</span>
+      <span class="shop-sub">▸ ARCADE GAME STATION ◂</span>
+      <b>13.02-13.52 · PS4 EXPLOIT</b>
     </div>
+
     <div id="spin"></div>
-    <div id="msg">Tahan tombol PS > Power > Restart PS4</div>
+    <div id="msg">Tahan tombol PS &gt; Power &gt; Restart PS4</div>
+
     <div id="wrap">
       <div id="state"></div>
       <div id="out"></div>
     </div>
+
+    <div class="thanks">
+      <span class="coin"></span> © 2025 <strong>Dreams Playstation</strong> <span class="coin"></span><br>
+      Hubungi: <strong>089668984861</strong><br>
+      <a class="wa" href="https://wa.me/6289668984861" target="_blank">💬 CHAT WHATSAPP</a>
+    </div>
+
     <script type="module">
       import "./jb.js?v=10";
     </script>
