@@ -3,29 +3,198 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ps4 poops</title>
+<title>Dreams Playstation - PS4 Poops</title>
 <style>
-  html, body { margin:0; padding:0; background:#0b0d10; color:#c8ced8;
-               font:15px/1.45 "Segoe UI", system-ui, sans-serif; }
-  #wrap { padding:16px 18px; }
-  #state { font-size:22px; font-weight:700; margin:0 0 10px; }
-  #out { white-space:pre-wrap; font:12px/1.45 Consolas, monospace;
-         background:#11151b; border:1px solid #1e2732; border-radius:5px;
-         padding:10px 12px; height:calc(100vh - 141px); overflow-y:auto; }
-  .ok { color:#7fd0a0; } .bad { color:#d08a7f; } .warn { color:#d8c07f; }
-  #brand { text-align:center; padding:8px 10px; background:#0e1116;
-           border-bottom:1px solid #1e2732; }
-  #brand img { width:28px; height:28px; margin-right:8px; border-radius:50%;
-               vertical-align:middle; }
-  #brand b { font-size:15px; font-weight:700; letter-spacing:.14em;
-             color:#e6ebf2; vertical-align:middle; }
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a1a;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(0, 200, 255, 0.15) 0%, transparent 40%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 4px);
+    color: #ffffff;
+    font-family: "Press Start 2P", "Segoe UI", system-ui, monospace;
+    min-height: 100vh;
+  }
+
+  #brand {
+    text-align: center;
+    padding: 14px 10px;
+    background: linear-gradient(145deg, #14142b, #1e1e3f);
+    border-bottom: 3px solid #ff2e88;
+    box-shadow: 0 0 20px rgba(255, 46, 136, 0.6), 0 0 40px rgba(0, 200, 255, 0.3);
+  }
+
+  #brand .shop-name {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #ff2e88;
+    text-shadow: 0 0 8px #ff2e88, 0 0 16px #ff2e88;
+    margin-bottom: 6px;
+    animation: flicker 2s infinite alternate;
+  }
+
+  @keyframes flicker {
+    0%, 100% { opacity: 1; }
+    92% { opacity: 1; }
+    93% { opacity: 0.4; }
+    94% { opacity: 1; }
+    96% { opacity: 0.6; }
+    97% { opacity: 1; }
+  }
+
+  #brand .shop-sub {
+    display: block;
+    font-size: 0.5rem;
+    color: #00e0ff;
+    text-shadow: 0 0 6px #00e0ff;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  #brand b {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    background: linear-gradient(45deg, #ff00aa, #00ffff, #ff00ff, #00ff9d);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientFlow 8s ease infinite;
+  }
+
+  @keyframes gradientFlow {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+  }
+
+  #wrap {
+    padding: 16px 18px;
+    max-width: 800px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  #state {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin: 0 0 12px;
+    color: #00e0ff;
+    text-shadow: 0 0 10px rgba(0, 224, 255, 0.8);
+    line-height: 1.8;
+  }
+
+  #out {
+    white-space: pre-wrap;
+    word-break: break-all;
+    font: 12px/1.6 Consolas, monospace;
+    background: #08081a;
+    border: 2px dashed #2e2e5e;
+    border-radius: 8px;
+    padding: 12px;
+    height: calc(100vh - 220px);
+    overflow-y: auto;
+    color: #ffffff;
+    box-shadow: 0 0 20px rgba(255, 46, 136, 0.3);
+  }
+
+  .ok {
+    color: #00ff6a;
+    text-shadow: 0 0 6px rgba(0, 255, 106, 0.7);
+  }
+
+  .bad {
+    color: #ff4d4d;
+    text-shadow: 0 0 6px rgba(255, 77, 77, 0.7);
+  }
+
+  .warn {
+    color: #ffe600;
+    text-shadow: 0 0 6px rgba(255, 230, 0, 0.7);
+  }
+
+  .thanks {
+    text-align: center;
+    margin: 20px auto 30px;
+    padding: 15px 10px;
+    border-top: 2px dashed #2e2e5e;
+    font-size: 0.55rem;
+    color: #ffe600;
+    text-shadow: 0 0 8px rgba(255, 230, 0, 0.7);
+    line-height: 2.2;
+    font-family: "Press Start 2P", monospace;
+    max-width: 800px;
+  }
+
+  .thanks strong {
+    color: #ff2e88;
+    text-shadow: 0 0 8px #ff2e88;
+  }
+
+  .thanks .wa {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 14px;
+    background: linear-gradient(145deg, #00b34a, #008f3a);
+    border: 2px solid #00ff6a;
+    border-radius: 8px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.55rem;
+    box-shadow: 0 0 12px rgba(0, 255, 106, 0.6);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .thanks .wa:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 255, 106, 0.9);
+  }
+
+  .coin {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle at 35% 35%, #fff6a0, #ffcc00 60%, #b8860b);
+    border-radius: 50%;
+    border: 2px solid #ffea00;
+    box-shadow: 0 0 8px rgba(255, 204, 0, 0.9);
+    vertical-align: middle;
+    margin: 0 4px;
+    animation: spin 1.5s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+  }
 </style>
 </head>
 <body>
-<div id="wrap">
-  <div id="state">loading poops chain...</div>
-  <div id="out"></div>
-</div>
+
+  <div id="brand">
+    <span class="shop-name">🎮 DREAMS PLAYSTATION 🎮</span>
+    <span class="shop-sub">▸ GAME STATION ◂</span>
+    <b>PS4 POOPS CHAIN</b>
+  </div>
+
+  <div id="wrap">
+    <div id="state">loading poops chain...</div>
+    <div id="out"></div>
+
+    <div class="thanks">
+      <span class="coin"></span> © 2025 <strong>Dreams Playstation</strong> <span class="coin"></span><br>
+      Hubungi: <strong>089668984861</strong><br>
+      <a class="wa" href="https://wa.me/6289668984861" target="_blank">💬 CHAT WHATSAPP</a>
+    </div>
+  </div>
+
 <script type="module">import "./chain_poops.js";</script>
 </body>
 </html>
