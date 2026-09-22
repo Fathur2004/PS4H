@@ -2,21 +2,159 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>13.02-13.52 · PS4 Exploit</title>
+    <title>Dreams Playstation - 13.02-13.52 · PS4 Exploit</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
         body {
-            background: #ffffff;
-            color: #111111;
-            font: 15px/1.5 monospace;
-            margin: 20px;
+            background-color: #0a0a1a;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255, 0, 128, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(0, 200, 255, 0.15) 0%, transparent 40%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 4px);
+            color: #ffffff;
+            font-family: "Press Start 2P", "Segoe UI", Tahoma, monospace;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
         }
+
+        .shop-name {
+            font-size: 0.95rem;
+            color: #ff2e88;
+            text-shadow: 0 0 8px #ff2e88, 0 0 16px #ff2e88;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            text-align: center;
+            animation: flicker 2s infinite alternate;
+        }
+
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            92% { opacity: 1; }
+            93% { opacity: 0.4; }
+            94% { opacity: 1; }
+            96% { opacity: 0.6; }
+            97% { opacity: 1; }
+        }
+
+        .shop-sub {
+            font-size: 0.55rem;
+            color: #00e0ff;
+            text-shadow: 0 0 6px #00e0ff;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .marquee {
+            font-size: 0.5rem;
+            color: #00ff6a;
+            text-shadow: 0 0 6px #00ff6a;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+
+        .title-box {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .main-title {
+            background: linear-gradient(45deg, #ff00aa, #00ffff, #ff00ff, #00ff9d);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientFlow 8s ease infinite;
+            text-shadow: 0 0 30px rgba(255, 0, 170, 0.7);
+            font-size: 0.75rem;
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        @keyframes gradientFlow {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
         #console {
             font-family: monospace;
-            white-space: pre;
+            white-space: pre-wrap;
+            word-break: break-all;
+            font-size: 13px;
+            color: #ffffff;
+            padding: 14px;
+            background: #08081a;
+            border: 2px dashed #2e2e5e;
+            border-radius: 8px;
+            max-width: 700px;
+            width: 100%;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(255, 46, 136, 0.3);
+            line-height: 1.7;
+            box-sizing: border-box;
         }
-        .ok   { color: #1a7a1a; }
-        .bad  { color: #cc0000; }
-        .warn { color: #aa6600; }
+
+        .ok   { color: #00ff6a; text-shadow: 0 0 6px rgba(0, 255, 106, 0.7); }
+        .bad  { color: #ff4d4d; text-shadow: 0 0 6px rgba(255, 77, 77, 0.7); }
+        .warn { color: #ffe600; text-shadow: 0 0 6px rgba(255, 230, 0, 0.7); }
+
+        .thanks {
+            text-align: center;
+            margin-top: 25px;
+            padding: 15px 10px;
+            border-top: 2px dashed #2e2e5e;
+            font-size: 0.55rem;
+            color: #ffe600;
+            text-shadow: 0 0 8px rgba(255, 230, 0, 0.7);
+            line-height: 2.2;
+            font-family: "Press Start 2P", monospace;
+        }
+
+        .thanks strong {
+            color: #ff2e88;
+            text-shadow: 0 0 8px #ff2e88;
+        }
+
+        .thanks .wa {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 8px 14px;
+            background: linear-gradient(145deg, #00b34a, #008f3a);
+            border: 2px solid #00ff6a;
+            border-radius: 8px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 0.55rem;
+            box-shadow: 0 0 12px rgba(0, 255, 106, 0.6);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .thanks .wa:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 106, 0.9);
+        }
+
+        .coin {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: radial-gradient(circle at 35% 35%, #fff6a0, #ffcc00 60%, #b8860b);
+            border-radius: 50%;
+            border: 2px solid #ffea00;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.9);
+            vertical-align: middle;
+            margin: 0 4px;
+            animation: spin 1.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
     </style>
     <script>
     if (window.applicationCache && window.applicationCache.status == 0) {
@@ -25,9 +163,22 @@
     </script>
 </head>
 <body>
-    13.02-13.52 · PS4 Exploit<br>
-    <br>
+
+    <div class="title-box">
+        <div class="shop-name">🎮 DREAMS PLAYSTATION 🎮</div>
+        <div class="shop-sub">▸ GAME STATION ◂</div>
+        <div class="marquee">★ INSERT COIN ★ PLAY NOW ★</div>
+        <div class="main-title">13.02-13.52 · PS4 Exploit</div>
+    </div>
+
     <pre id="console"></pre>
+
+    <div class="thanks">
+        <span class="coin"></span> © 2025 <strong>Dreams Playstation</strong> <span class="coin"></span><br>
+        Hubungi: <strong>089668984861</strong><br>
+        <a class="wa" href="https://wa.me/6289668984861" target="_blank">💬 CHAT WHATSAPP</a>
+    </div>
+
 </body>
 <script>
 (function () {
